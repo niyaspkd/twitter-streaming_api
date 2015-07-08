@@ -3,5 +3,5 @@ sudo apt-get install python-pip
 #install request,tweepy  libraries using
 pip install requests
 pip install tweepy
-#run using
+#run using command
 python tweepy.py
