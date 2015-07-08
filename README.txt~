@@ -1,0 +1,7 @@
+#open the terminal
+sudo apt-get install python-pip
+#install request,tweepy  libraries using
+pip install requests
+pip install tweepy
+#run using
+python tweepy.py
