@@ -5,3 +5,4 @@ pip install requests
 pip install tweepy
 #run using command
 python tweep.py
+then enter the keyword to track and press 
