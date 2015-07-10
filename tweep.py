@@ -71,7 +71,7 @@ class listener(StreamListener):
 	
                 threading.Timer(60,total_r(users)).start()
                
-                print words
+                print words_freq(words)
 		print links
                
                                
