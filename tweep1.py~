@@ -1,0 +1,59 @@
+from tweepy import Stream
+from tweepy import OAuthHandler
+from tweepy.streaming import StreamListener
+import time
+import json
+from collections import Counter
+ckey='ol2PmNbIKEntIGSHcPooa2KXm'
+csecret='6QZwEnU8zjnmtk90OQrmWqNhCEExLdYhpGxcbM5pxWVBYxdEW0'
+atoken='2806936872-WKzGa0CONWb1RNwtOYqjyvSFRQiKRhNOV0wWXG7'
+asecret='jVV2SDHmbSCJ1o6Nm1uA6xCbOnsH2l0HcarK89r79Mg87'
+links=[]
+words=[]
+users=[]    
+class listener(StreamListener):
+
+	def on_data(self,data):
+	    try:
+		data=json.loads(data)
+                
+		users.append((data['user']['screen_name'],data['created_at']))
+ 		
+                words.append(data['text'].encode('utf-8'))
+ 		
+		
+                if data['entities']['urls']!='':
+                 links.append(data['entities']['urls'])
+		
+               
+                time.sleep(60)
+                print time.ctime()
+                print "USER COUNT"
+                print "##########"
+                print Counter(users)  
+                print "____________"    
+		print "WORDS COUNT"
+                print "##########"
+                print Counter(words) 
+                print "______"	  
+                print "URLS"
+                print "##########"
+                print links
+                
+                print "______"                
+          		
+		return True
+                
+                
+		
+	    except BaseException,e:
+		print 'failed ondata,',str(e)
+		time.sleep(5)
+	def on_error(self,status):
+		print status
+
+auth = OAuthHandler(ckey,csecret)
+auth.set_access_token(atoken,asecret)
+twitterStream = Stream(auth,listener())
+print time.ctime()
+twitterStream.filter(track=[raw_input("Enter the keyword")])
